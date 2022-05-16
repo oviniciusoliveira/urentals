@@ -1,0 +1,122 @@
+openapi: "3.0.3"
+info:
+  version: "1.0.0"
+  title: uRentalCars API Documentation
+  description: uRentalCars API documentation using Swagger
+  contact:
+    name: uRentalCars
+    url: https://viniciusdeoliveira.net
+    email: viniciuso.contato@gmail.com
+paths:
+  /categories:
+    post:
+      summary: Create a new category
+      description: Create a new car category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryCreate"
+            example:
+              name: Category name sample
+              description: Category description sample
+      responses:
+        201:
+          description: Created
+        500:
+          description: Category already exists
+      tags:
+        - category
+    get:
+      tags:
+        - category
+      summary: List all categories
+      description: List all car categories
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+
+
+  /categories/import:
+    post:
+      tags:
+        - category
+      summary: Import specifications
+      description: Import a list of specifications from a csv file
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        201:
+          description: Created
+
+  /specifications:
+    post:
+      summary: Create a new specification
+      description: Create a new car specification
+      tags:
+        - specification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SpecificationCreate"
+      responses:
+        201:
+          description: Created
+        400:
+          description: Specification already exists
+
+
+tags:
+  - name: category
+    description: Car category
+components:
+  schemas:
+    Category:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          description:
+            type: string
+          created_at:
+            type: string
+
+    CategoryCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - description
+
+    SpecificationCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - description
+
+
