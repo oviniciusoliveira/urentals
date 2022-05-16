@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    image: urentcars-image
+    container_name: urentcars-backend
+    ports:
+      - 3333:3333
+    volumes:
+      - .:/usr/app
+      - node_modules:/usr/app/node_modules
+
+volumes:
+  node_modules: {}
