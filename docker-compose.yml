@@ -1,15 +1,38 @@
 version: "3.7"
 
 services:
+  database:
+    image: postgres
+    container_name: urentcars-database
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: urentcars-db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - urentcars-network
+
   app:
     build: .
-    image: urentcars-image
     container_name: urentcars-backend
     ports:
       - 3333:3333
     volumes:
       - .:/usr/app
-      - node_modules:/usr/app/node_modules
+    networks:
+      - urentcars-network
+    environment:
+      - DATABASE_HOST=database
+    depends_on:
+      - database
 
 volumes:
-  node_modules: {}
+  pgdata: {}
+
+networks:
+  urentcars-network:
+    driver: bridge
