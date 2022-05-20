@@ -1,0 +1,26 @@
+/* eslint-disable indent */
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+
+@Entity('users')
+export class UserTypeORM {
+  @PrimaryColumn()
+  id!: string;
+
+  @Column()
+  name!: string;
+
+  @Column()
+  email!: string;
+
+  @Column()
+  password!: string;
+
+  @Column()
+  driver_license!: string;
+
+  @Column()
+  is_admin!: boolean;
+
+  @CreateDateColumn()
+  created_at!: Date;
+}

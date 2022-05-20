@@ -29,6 +29,8 @@ services:
       - DATABASE_HOST=database
     depends_on:
       - database
+    env_file:
+      - .env
 
 volumes:
   pgdata: {}

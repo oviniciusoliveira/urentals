@@ -1,2 +1,2 @@
-export { CategoriesRepositoryMemory as CategoriesRepository } from './memory/CategoriesRepositoryMemory';
-export { SpecificationsRepositoryMemory as SpecificationsRepository } from './memory/SpecificationsRepositoryMemory';
+export { CategoriesRepositoryTypeORM as CategoriesRepository } from './typeorm/CategoriesRepositoryTypeORM';
+export { SpecificationsRepositoryTypeORM as SpecificationsRepository } from './typeorm/SpecificationsRepositoryTypeORM';
