@@ -2,7 +2,7 @@ import express from 'express';
 import swaggerUI from 'swagger-ui-express';
 import YAML from 'yamljs';
 
-import './database';
+import '../typeorm';
 
 const swaggerDocument = YAML.load('./src/swagger.yaml');
 

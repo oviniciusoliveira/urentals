@@ -1,5 +1,5 @@
-import { CryptAdapterInterface } from '../../../../adapters/interfaces/CryptAdapter';
-import { TokenAdapterInterface } from '../../../../adapters/interfaces/TokenAdapter';
+import { CryptAdapterInterface } from '../../../../shared/infra/adapters/interfaces/CryptAdapter';
+import { TokenAdapterInterface } from '../../../../shared/infra/adapters/interfaces/TokenAdapter';
 import { UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepository';
 
 type AuthenticateUserData = {

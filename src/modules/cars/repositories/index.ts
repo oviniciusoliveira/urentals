@@ -1,2 +1,2 @@
-export { CategoriesRepositoryTypeORM as CategoriesRepository } from './typeorm/CategoriesRepositoryTypeORM';
-export { SpecificationsRepositoryTypeORM as SpecificationsRepository } from './typeorm/SpecificationsRepositoryTypeORM';
+export { CategoriesRepositoryTypeORM as CategoriesRepository } from '../infra/typeorm/repositories/CategoriesRepositoryTypeORM';
+export { SpecificationsRepositoryTypeORM as SpecificationsRepository } from '../infra/typeorm/repositories/SpecificationsRepositoryTypeORM';

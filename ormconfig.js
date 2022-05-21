@@ -5,9 +5,9 @@ module.exports = {
   username: 'admin',
   password: 'admin',
   database: 'urentcars-db',
-  entities: ['./src/database/entities/*.ts'],
-  migrations: ['./src/database/migrations/*.ts'],
+  entities: ['./src/**/infra/typeorm/entities/*.ts'],
+  migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
   cli: {
-    migrationsDir: './src/database/migrations',
+    migrationsDir: './src/shared/infra/typeorm/migrations',
   },
 };

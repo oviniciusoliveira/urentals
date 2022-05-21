@@ -1,9 +1,12 @@
 import { getRepository, Repository } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-import { CategoryTypeORM } from '../../../../database/entities/Category';
-import { Category } from '../../entities/Category';
-import { CategoriesRepositoryInterface, CreateCategoryDTO } from '../interfaces/CategoriesRepository';
+import { Category } from '../../../entities/Category';
+import {
+  CategoriesRepositoryInterface,
+  CreateCategoryDTO,
+} from '../../../repositories/interfaces/CategoriesRepository';
+import { CategoryTypeORM } from '../entities/Category';
 
 export class CategoriesRepositoryTypeORM implements CategoriesRepositoryInterface {
   private repository: Repository<CategoryTypeORM>;

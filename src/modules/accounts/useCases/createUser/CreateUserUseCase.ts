@@ -1,4 +1,4 @@
-import { CryptAdapterInterface } from '../../../../adapters/interfaces/CryptAdapter';
+import { CryptAdapterInterface } from '../../../../shared/infra/adapters/interfaces/CryptAdapter';
 import { CreateUserDTO, UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepository';
 
 export class CreateUserUseCase {

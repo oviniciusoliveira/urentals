@@ -1,1 +1,1 @@
-export { UsersRepositoryTypeORM as UsersRepository } from './typeorm/UsersRepositoryTypeORM';
+export { UsersRepositoryTypeORM as UsersRepository } from '../infra/typeorm/repositories/UsersRepositoryTypeORM';

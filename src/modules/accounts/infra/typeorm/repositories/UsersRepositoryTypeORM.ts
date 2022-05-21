@@ -1,9 +1,14 @@
 import { getRepository, Repository } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-import { UserTypeORM } from '../../../../database/entities/User';
-import { User } from '../../entities/User';
-import { CreateUserDTO, UpdateUserDTO, UsersRepositoryInterface } from '../interfaces/UsersRepository';
+import { User } from '@/modules/accounts/entities/User';
+import {
+  CreateUserDTO,
+  UpdateUserDTO,
+  UsersRepositoryInterface,
+} from '@/modules/accounts/repositories/interfaces/UsersRepository';
+
+import { UserTypeORM } from '../entities/User';
 
 export class UsersRepositoryTypeORM implements UsersRepositoryInterface {
   private repository: Repository<UserTypeORM>;
