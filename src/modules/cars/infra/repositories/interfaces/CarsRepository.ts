@@ -7,7 +7,7 @@ export type CreateCarDTO = {
   license_plate: string;
   fine_amount: number;
   brand: string;
-  category_id: number;
+  category_id: string;
 };
 
 export interface CarsRepositoryInterface {
