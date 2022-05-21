@@ -1,22 +1,52 @@
 # uRentCars
 
-## Comandos Docker
-docker ps               lista containers rodando
-docker ps -a            lista todos os containers
-docker rm <id/name>     remove container
-docker start <id/name>  starta o container
-docker stop <id/name>   para o container
-docker exec -it <id/name> /bin/bash   acessa o bash do container
-docker logs <id/name>     mostra os logs
-docker logs <id/name> -f  monitora os logs
-docker exec <id/name> cat /etc/hosts  : mostra a rede do container
+## Cadastro de carro
+### Requisitos funcionais
+- [ ] Deve ser possível cadastrar um novo carro.
+- [ ] Deve ser possível listar todas as categorias
 
-docker-compose up -d    cria os serviços e libera o terminal
-docker-compose down     deleta os serviços que foram criados
-docker-compose stop     para o docker-compose
-docker-compose start    iniciar os serviços
+### Regras de negócio
+- [ ] Não deve ser possível cadastrar um carro com uma placa já existente.
+- [ ] Não deve ser possível alterar a placa de um carro já cadastrado.
+- [ ] O carro deve ser cadastrado por padrão como disponível.
+- [ ] O usuário responsável pelo cadastro deve ser um administrador.
 
+## Listagem de carro
+### Requisitos funcionais
+- [ ] Deve ser possível listar todos os carros.
+- [ ] Deve ser possível listar todos os carros pelo nome da categoria
+- [ ] Deve ser possível listar todos os carros pelo nome da marca
+- [ ] Deve ser possível listar todos os carros pelo nome do carro
+### Regras de negócio
+- [ ] Não deve ser possível listar carros indisponíveis.
+- [ ] O usuário não precisa estar autenticado para visualizar a lista de carros.
 
+## Especificação de carro
+### Requisitos funcionais
+- [ ] Deve ser possível cadastrar uma especificação para um carro.
+- [ ] Deve ser possível listar todas as especificações
+- [ ] Deve ser possível listar todos os carros
+## Regras de negócio
+- [ ] Não deve ser possível cadastrar uma especificação para um carro não cadastrado.
+- [ ] Não deve ser possível cadastrar uma especificação já existente para o mesmo carro.
+- [ ] O usuário responsável pelo cadastro deve ser um usuário administrador.
+
+## Cadastro de imagens do carro
+### Requisitos funcionais
+- [ ] Deve ser possível cadastrar a imagem do carro
+- [ ] Deve ser possível listar todos os carros
+
+### Regras de negócio
+- [ ] O usuário responsável pelo cadastro deve ser um usuário administrador
+
+## Aluguel de carro
+### Requisitos funcionais
+- [ ] Deve ser possível cadastrar um aluguel para um carro e um usuário.
+
+### Regras de negócio
+- [ ] O aluguel deve ter duração mínima de 24 horas
+- [ ] Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel corrente para o mesmo usuário.
+- [ ] Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel corrente para o mesmo carro.
 ## TODO
 - [ ] Tipar os erros
 - [ ] create a file to config env vars in a unique place
