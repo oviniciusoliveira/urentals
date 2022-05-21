@@ -1,6 +1,6 @@
 import { CryptAdapterInterface } from '../../../../adapters/interfaces/CryptAdapter';
 import { TokenAdapterInterface } from '../../../../adapters/interfaces/TokenAdapter';
-import { UsersRepository } from '../../repositories';
+import { UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepository';
 
 type AuthenticateUserData = {
   email: string;
@@ -16,13 +16,13 @@ type AuthenticateUserResponse = {
   };
 };
 
-const expirationTime = 60 * 60 * 24 * 1; // 1 day
-
 export class AuthenticateUserUseCase {
   constructor(
-    private usersRepository: UsersRepository,
+    private usersRepository: UsersRepositoryInterface,
     private cryptAdapter: CryptAdapterInterface,
     private tokenAdapter: TokenAdapterInterface,
+    private secretTokenKey: string,
+    private expirationTime: number,
   ) {}
 
   async perform({ email, password }: AuthenticateUserData): Promise<AuthenticateUserResponse> {
@@ -38,7 +38,7 @@ export class AuthenticateUserUseCase {
       throw new Error('Password incorrect');
     }
 
-    const token = await this.tokenAdapter.generateToken({}, process.env.SECRET_TOKEN_KEY!, user.id, expirationTime);
+    const token = await this.tokenAdapter.generateToken({}, this.secretTokenKey, user.id, this.expirationTime);
 
     return {
       token,
