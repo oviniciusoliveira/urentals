@@ -2,8 +2,8 @@ import { CryptAdapterBcrypt } from '../../../../shared/infra/adapters/bcrypt/Cry
 import { CryptAdapterInterface } from '../../../../shared/infra/adapters/interfaces/CryptAdapter';
 import { TokenAdapterInterface } from '../../../../shared/infra/adapters/interfaces/TokenAdapter';
 import { TokenAdapterJWT } from '../../../../shared/infra/adapters/jsonwebtoken/TokenAdapterJWT';
-import { UsersRepositoryMemory } from '../../../accounts/repositories/memory/UsersRepositoryMemory';
-import { CreateUserDTO, UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepository';
+import { CreateUserDTO, UsersRepositoryInterface } from '../../infra/repositories/interfaces/UsersRepository';
+import { UsersRepositoryMemory } from '../../infra/repositories/memory/UsersRepositoryMemory';
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 

@@ -1,5 +1,5 @@
 import { CryptAdapter } from '../../../../shared/infra/adapters';
-import { UsersRepository } from '../../repositories';
+import { UsersRepository } from '../../infra/repositories';
 import { CreateUserController } from './CreateUserController';
 import { CreateUserUseCase } from './CreateUserUseCase';
 

@@ -1,5 +1,5 @@
 import { CryptAdapterInterface } from '../../../../shared/infra/adapters/interfaces/CryptAdapter';
-import { CreateUserDTO, UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepository';
+import { CreateUserDTO, UsersRepositoryInterface } from '../../infra/repositories/interfaces/UsersRepository';
 
 export class CreateUserUseCase {
   constructor(private usersRepository: UsersRepositoryInterface, private cryptAdapter: CryptAdapterInterface) {}

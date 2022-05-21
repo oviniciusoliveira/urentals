@@ -1,7 +1,7 @@
 import {
   CreateSpecificationDTO,
   SpecificationsRepositoryInterface,
-} from '../../repositories/interfaces/SpecificationsRepository';
+} from '../../infra/repositories/interfaces/SpecificationsRepository';
 
 export class CreateSpecificationUseCase {
   constructor(private specificationsRepository: SpecificationsRepositoryInterface) {}

@@ -1,4 +1,7 @@
-import { CategoriesRepositoryInterface, CreateCategoryDTO } from '../../repositories/interfaces/CategoriesRepository';
+import {
+  CategoriesRepositoryInterface,
+  CreateCategoryDTO,
+} from '../../infra/repositories/interfaces/CategoriesRepository';
 
 export class CreateCategoryUseCase {
   constructor(private categoriesRepository: CategoriesRepositoryInterface) {}

@@ -1,5 +1,5 @@
-import { CategoriesRepositoryInterface } from '../../repositories/interfaces/CategoriesRepository';
-import { CategoriesRepositoryMemory } from '../../repositories/memory/CategoriesRepositoryMemory';
+import { CategoriesRepositoryInterface } from '../../infra/repositories/interfaces/CategoriesRepository';
+import { CategoriesRepositoryMemory } from '../../infra/repositories/memory/CategoriesRepositoryMemory';
 import { CreateCategoryUseCase } from './CreateCategoryUseCase';
 
 let createCategoryUseCase: CreateCategoryUseCase;

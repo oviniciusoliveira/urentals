@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { UsersRepository } from '../../../../modules/accounts/repositories';
+import { UsersRepository } from '../../../../modules/accounts/infra/repositories';
 import { TokenAdapter } from '../../adapters';
 
 export async function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {

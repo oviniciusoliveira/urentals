@@ -1,15 +1,21 @@
 # uRentCars
 
+
 ## Cadastro de carro
 ### Requisitos funcionais
 - [ ] Deve ser possível cadastrar um novo carro.
-- [ ] Deve ser possível listar todas as categorias
 
 ### Regras de negócio
-- [ ] Não deve ser possível cadastrar um carro com uma placa já existente.
-- [ ] Não deve ser possível alterar a placa de um carro já cadastrado.
+- [x] Não deve ser possível cadastrar um carro com uma placa já existente.
 - [ ] O carro deve ser cadastrado por padrão como disponível.
-- [ ] O usuário responsável pelo cadastro deve ser um administrador.
+* [ ] O usuário responsável pelo cadastro deve ser um administrador.
+
+## Categorias de carro
+
+### Requisitos funcionais
+- [ ] Deve ser possível listar todas as categorias de carros
+
+### Regras de negócio
 
 ## Listagem de carro
 ### Requisitos funcionais
@@ -47,6 +53,16 @@
 - [ ] O aluguel deve ter duração mínima de 24 horas
 - [ ] Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel corrente para o mesmo usuário.
 - [ ] Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel corrente para o mesmo carro.
+
+## Atualizar carro
+
+### Requisitos funcionais
+- [ ] Deve ser possível alterar o nome do carro
+
+### Regras de negócio
+- [ ] Somente usuário administrador pode atualizar informações de um carro.
+- [ ] Não deve ser possível alterar a placa de um carro já cadastrado.
+
 ## TODO
 - [ ] Tipar os erros
 - [ ] create a file to config env vars in a unique place

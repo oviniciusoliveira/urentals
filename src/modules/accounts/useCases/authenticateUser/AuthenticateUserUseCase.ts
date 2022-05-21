@@ -1,6 +1,6 @@
 import { CryptAdapterInterface } from '../../../../shared/infra/adapters/interfaces/CryptAdapter';
 import { TokenAdapterInterface } from '../../../../shared/infra/adapters/interfaces/TokenAdapter';
-import { UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepository';
+import { UsersRepositoryInterface } from '../../infra/repositories/interfaces/UsersRepository';
 
 type AuthenticateUserData = {
   email: string;

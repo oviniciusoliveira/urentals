@@ -1,5 +1,5 @@
 import { Category } from '../../entities/Category';
-import { CategoriesRepositoryInterface } from '../../repositories/interfaces/CategoriesRepository';
+import { CategoriesRepositoryInterface } from '../../infra/repositories/interfaces/CategoriesRepository';
 
 export class ListCategoriesUseCase {
   constructor(private categoriesRepository: CategoriesRepositoryInterface) {}

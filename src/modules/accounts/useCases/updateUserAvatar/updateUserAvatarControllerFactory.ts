@@ -1,4 +1,4 @@
-import { UsersRepository } from '../../repositories';
+import { UsersRepository } from '../../infra/repositories';
 import { UpdateUserAvatarController } from './UpdateUserAvatarController';
 import { UpdateUserAvatarUseCase } from './UpdateUserAvatarUseCase';
 

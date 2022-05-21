@@ -1,5 +1,5 @@
 import { CryptAdapter, TokenAdapter } from '../../../../shared/infra/adapters';
-import { UsersRepository } from '../../repositories';
+import { UsersRepository } from '../../infra/repositories';
 import { AuthenticateUserController } from './AuthenticateUserController';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 

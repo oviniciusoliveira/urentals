@@ -1,5 +1,5 @@
 import { deleteLocalFile } from '../../../../utils/deleteLocalFile';
-import { UsersRepositoryInterface } from '../../repositories/interfaces/UsersRepository';
+import { UsersRepositoryInterface } from '../../infra/repositories/interfaces/UsersRepository';
 
 type UpdateUserAvatarData = {
   userID: string;
