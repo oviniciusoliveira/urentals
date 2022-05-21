@@ -4,7 +4,7 @@ import { CreateUserDTO, UsersRepositoryInterface } from '../../repositories/inte
 export class CreateUserUseCase {
   constructor(private usersRepository: UsersRepositoryInterface, private cryptAdapter: CryptAdapterInterface) {}
 
-  async perform({ email, name, password, driver_license }: CreateUserDTO): Promise<void> {
+  async perform({ email, name, password, driver_license, avatar }: CreateUserDTO): Promise<void> {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userAlreadyExists) {
@@ -18,6 +18,7 @@ export class CreateUserUseCase {
       email,
       name,
       password: encryptedPassword,
+      avatar,
     });
   }
 }

@@ -3,7 +3,7 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { UserTypeORM } from '../../../../database/entities/User';
 import { User } from '../../entities/User';
-import { CreateUserDTO, UsersRepositoryInterface } from '../interfaces/UsersRepository';
+import { CreateUserDTO, UpdateUserDTO, UsersRepositoryInterface } from '../interfaces/UsersRepository';
 
 export class UsersRepositoryTypeORM implements UsersRepositoryInterface {
   private repository: Repository<UserTypeORM>;
@@ -12,13 +12,14 @@ export class UsersRepositoryTypeORM implements UsersRepositoryInterface {
     this.repository = getRepository(UserTypeORM);
   }
 
-  async create({ driver_license, email, name, password }: CreateUserDTO): Promise<void> {
+  async create({ driver_license, email, name, password, avatar }: CreateUserDTO): Promise<void> {
     const user = this.repository.create({
       id: uuidV4(),
       driver_license,
       email,
       name,
       password,
+      avatar,
     });
 
     await this.repository.save(user);
@@ -31,15 +32,7 @@ export class UsersRepositoryTypeORM implements UsersRepositoryInterface {
 
     if (!user) return null;
 
-    return {
-      id: user.id,
-      createdAt: user.created_at,
-      driverLicense: user.driver_license,
-      email: user.email,
-      isAdmin: user.is_admin,
-      name: user.name,
-      password: user.password,
-    };
+    return this.mapUserFromTypeORM(user);
   }
 
   async findByID(id: string): Promise<User | null> {
@@ -49,6 +42,14 @@ export class UsersRepositoryTypeORM implements UsersRepositoryInterface {
 
     if (!user) return null;
 
+    return this.mapUserFromTypeORM(user);
+  }
+
+  async update(id: string, data: UpdateUserDTO): Promise<void> {
+    await this.repository.update(id, data);
+  }
+
+  private mapUserFromTypeORM(user: UserTypeORM): User {
     return {
       id: user.id,
       createdAt: user.created_at,
@@ -57,6 +58,7 @@ export class UsersRepositoryTypeORM implements UsersRepositoryInterface {
       isAdmin: user.is_admin,
       name: user.name,
       password: user.password,
+      avatar: user.avatar,
     };
   }
 }

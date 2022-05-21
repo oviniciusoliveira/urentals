@@ -21,6 +21,9 @@ export class UserTypeORM {
   @Column()
   is_admin!: boolean;
 
+  @Column()
+  avatar?: string;
+
   @CreateDateColumn()
   created_at!: Date;
 }

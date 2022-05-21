@@ -6,4 +6,5 @@ export type User = {
   driverLicense: string;
   isAdmin: boolean;
   createdAt: Date;
+  avatar?: string;
 };

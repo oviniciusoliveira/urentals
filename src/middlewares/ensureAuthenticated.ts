@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 import { TokenAdapter } from '../adapters';
 import { UsersRepository } from '../modules/accounts/repositories';
@@ -28,6 +28,10 @@ export async function ensureAuthenticated(request: Request, response: Response, 
     if (!user) {
       return response.status(401).json({ error: 'User not found' });
     }
+
+    request.user = {
+      id: user.id,
+    };
 
     next();
   } catch {
