@@ -20,7 +20,7 @@ export async function ensureAuthenticated(request: Request, response: Response, 
 
   try {
     const tokenAdapter = new TokenAdapter();
-    const { sub } = await tokenAdapter.verifyToken(token, process.env.SECRET_TOKEN_KEY!);
+    const { sub } = await tokenAdapter.verifyToken(token, SECRET_TOKEN_KEY);
 
     const usersRepository = new UsersRepository();
     const user = await usersRepository.findByID(sub);

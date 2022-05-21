@@ -45,7 +45,7 @@ describe('Create Car', () => {
         daily_rate: 100,
         fine_amount: 10,
       });
-    }).rejects.toThrow('Car already exists');
+    }).rejects.toThrow('Car with this license plate already exists');
   });
 
   it('should always create a new car with available by default', async () => {
