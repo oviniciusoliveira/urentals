@@ -19,3 +19,4 @@ docker-compose start    iniciar os serviços
 
 ## TODO
 - [ ] Tipar os erros
+- [ ] create a file to config env vars in a unique place

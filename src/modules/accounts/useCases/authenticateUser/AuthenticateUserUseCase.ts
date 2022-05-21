@@ -38,7 +38,7 @@ export class AuthenticateUserUseCase {
       throw new Error('Password incorrect');
     }
 
-    const token = await this.tokenAdapter.generateToken({}, 'secretKey', user.id, expirationTime);
+    const token = await this.tokenAdapter.generateToken({}, process.env.SECRET_TOKEN_KEY!, user.id, expirationTime);
 
     return {
       token,

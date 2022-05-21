@@ -41,4 +41,22 @@ export class UsersRepositoryTypeORM implements UsersRepositoryInterface {
       password: user.password,
     };
   }
+
+  async findByID(id: string): Promise<User | null> {
+    const user = await this.repository.findOne({
+      id,
+    });
+
+    if (!user) return null;
+
+    return {
+      id: user.id,
+      createdAt: user.created_at,
+      driverLicense: user.driver_license,
+      email: user.email,
+      isAdmin: user.is_admin,
+      name: user.name,
+      password: user.password,
+    };
+  }
 }

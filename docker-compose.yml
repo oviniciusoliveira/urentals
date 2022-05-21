@@ -25,12 +25,10 @@ services:
       - .:/usr/app
     networks:
       - urentcars-network
-    environment:
-      - DATABASE_HOST=database
     depends_on:
       - database
     env_file:
-      - .env
+      - .env-docker
 
 volumes:
   pgdata: {}

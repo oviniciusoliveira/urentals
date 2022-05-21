@@ -16,4 +16,10 @@ export class TokenAdapterJWT implements TokenAdapterInterface {
 
     return token;
   }
+
+  async verifyToken(token: string, secretKey: string): Promise<any> {
+    const payload = jwt.verify(token, secretKey);
+
+    return payload;
+  }
 }

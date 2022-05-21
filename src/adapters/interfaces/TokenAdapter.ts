@@ -5,4 +5,6 @@ export interface TokenAdapterInterface {
     userID: string | number,
     expiresIn: number,
   ): Promise<string>;
+
+  verifyToken(token: string, secretKey: string): Promise<Record<string, any>>;
 }
