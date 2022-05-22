@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from 'uuid';
 
 import { Car } from '../../../entities/Car';
-import { CarsRepositoryInterface, CreateCarDTO } from '../interfaces/CarsRepository';
+import { CarsRepositoryInterface, CreateCarDTO, FindAvailableCarsDTO } from '../interfaces/CarsRepository';
 
 export class CarsRepositoryMemory implements CarsRepositoryInterface {
   cars: Car[] = [];
@@ -36,5 +36,23 @@ export class CarsRepositoryMemory implements CarsRepositoryInterface {
   async findByLicensePlate(license_plate: string): Promise<Car | null> {
     const car = this.cars.find((car) => car.license_plate === license_plate);
     return car || null;
+  }
+
+  async findAvailable({ brand, category_id, name }: FindAvailableCarsDTO): Promise<Car[]> {
+    let cars = this.cars.filter((car) => car.available);
+
+    if (brand) {
+      cars = cars.filter((car) => car.brand === brand);
+    }
+
+    if (category_id) {
+      cars = cars.filter((car) => car.category_id === category_id);
+    }
+
+    if (name) {
+      cars = cars.filter((car) => car.name === name);
+    }
+
+    return cars;
   }
 }

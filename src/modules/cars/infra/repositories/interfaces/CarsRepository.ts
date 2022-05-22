@@ -10,7 +10,14 @@ export type CreateCarDTO = {
   category_id: string;
 };
 
+export type FindAvailableCarsDTO = {
+  category_id?: string;
+  brand?: string;
+  name?: string;
+};
+
 export interface CarsRepositoryInterface {
   create(data: CreateCarDTO): Promise<Car>;
   findByLicensePlate(license_plate: string): Promise<Car | null>;
+  findAvailable(data: FindAvailableCarsDTO): Promise<Car[]>;
 }

@@ -3,7 +3,7 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { Car } from '@/modules/cars/entities/Car';
 
-import { CarsRepositoryInterface, CreateCarDTO } from '../../interfaces/CarsRepository';
+import { CarsRepositoryInterface, CreateCarDTO, FindAvailableCarsDTO } from '../../interfaces/CarsRepository';
 import { CarTypeORM } from '../entities/Car';
 
 export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
@@ -47,6 +47,34 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
     if (!car) return null;
 
     return this.mapCarFromTypeORM(car);
+  }
+
+  async findAvailable({ brand, category_id, name }: FindAvailableCarsDTO): Promise<Car[]> {
+    const query = this.repository.createQueryBuilder('car');
+
+    query.andWhere('car.available = :available', { available: true });
+
+    if (category_id) {
+      query.andWhere('car.category_id = :category_id', {
+        category_id,
+      });
+    }
+
+    if (brand) {
+      query.andWhere('car.brand = :brand', {
+        brand,
+      });
+    }
+
+    if (name) {
+      query.andWhere('car.name = :name', {
+        name,
+      });
+    }
+
+    const cars = await query.getMany();
+
+    return cars.map((car) => this.mapCarFromTypeORM(car));
   }
 
   private mapCarFromTypeORM(car: CarTypeORM): Car {
