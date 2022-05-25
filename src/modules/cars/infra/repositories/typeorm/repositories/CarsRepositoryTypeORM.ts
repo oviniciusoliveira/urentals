@@ -39,6 +39,20 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
     return this.mapCarFromTypeORM(carSaved);
   }
 
+  async update(id: string, data: CreateCarDTO): Promise<Car | null> {
+    const car = await this.repository.findOne({
+      id,
+    });
+
+    if (!car) return null;
+
+    const carUpdated = await this.repository.save({
+      ...car,
+      ...data,
+    });
+    return this.mapCarFromTypeORM(carUpdated);
+  }
+
   async findByLicensePlate(license_plate: string): Promise<Car | null> {
     const car = await this.repository.findOne({
       license_plate,
@@ -77,6 +91,16 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
     return cars.map((car) => this.mapCarFromTypeORM(car));
   }
 
+  async findByID(id: string): Promise<Car | null> {
+    const car = await this.repository.findOne({
+      id,
+    });
+
+    if (!car) return null;
+
+    return this.mapCarFromTypeORM(car);
+  }
+
   private mapCarFromTypeORM(car: CarTypeORM): Car {
     return {
       id: car.id,
@@ -89,6 +113,13 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
       description: car.description,
       fine_amount: car.fine_amount,
       license_plate: car.license_plate,
+      specifications:
+        car.specifications?.map((specification) => ({
+          id: specification.id,
+          createdAt: specification.created_at,
+          name: specification.name,
+          description: specification.description,
+        })) || [],
     };
   }
 }

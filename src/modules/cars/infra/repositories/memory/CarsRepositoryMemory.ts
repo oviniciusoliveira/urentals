@@ -14,6 +14,7 @@ export class CarsRepositoryMemory implements CarsRepositoryInterface {
     fine_amount,
     license_plate,
     name,
+    specifications = [],
   }: CreateCarDTO): Promise<Car> {
     const car: Car = {
       id: uuidV4(),
@@ -26,11 +27,27 @@ export class CarsRepositoryMemory implements CarsRepositoryInterface {
       daily_rate,
       fine_amount,
       license_plate,
+      specifications,
     };
 
     this.cars.push(car);
 
     return car;
+  }
+
+  async update(id: string, data: CreateCarDTO): Promise<Car | null> {
+    const carIndex = this.cars.findIndex((car) => car.id === id);
+
+    if (carIndex === -1) return null;
+
+    const carUpdated: Car = {
+      ...this.cars[carIndex],
+      ...data,
+    };
+
+    this.cars[carIndex] = carUpdated;
+
+    return carUpdated;
   }
 
   async findByLicensePlate(license_plate: string): Promise<Car | null> {
@@ -54,5 +71,11 @@ export class CarsRepositoryMemory implements CarsRepositoryInterface {
     }
 
     return cars;
+  }
+
+  async findByID(id: string): Promise<Car | null> {
+    const car = this.cars.find((car) => car.id === id);
+
+    return car || null;
   }
 }

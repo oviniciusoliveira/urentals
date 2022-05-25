@@ -10,7 +10,7 @@ export class SpecificationsRepositoryMemory implements SpecificationsRepositoryI
     this.specifications = [];
   }
 
-  async create(data: CreateSpecificationDTO): Promise<void> {
+  async create(data: CreateSpecificationDTO): Promise<Specification> {
     const newSpecification: Specification = {
       id: uuidV4(),
       name: data.name,
@@ -19,6 +19,8 @@ export class SpecificationsRepositoryMemory implements SpecificationsRepositoryI
     };
 
     this.specifications.push(newSpecification);
+
+    return newSpecification;
   }
 
   async findByName(name: string): Promise<Specification | null> {
@@ -27,5 +29,9 @@ export class SpecificationsRepositoryMemory implements SpecificationsRepositoryI
     if (!specification) return null;
 
     return specification;
+  }
+
+  async findByIds(ids: string[]): Promise<Specification[]> {
+    return this.specifications.filter((specification) => ids.includes(specification.id));
   }
 }

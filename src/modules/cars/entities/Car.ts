@@ -1,3 +1,5 @@
+import { Specification } from './Specification';
+
 export type Car = {
   id: string;
   name: string;
@@ -9,4 +11,5 @@ export type Car = {
   brand: string;
   category_id: string;
   created_at: Date;
+  specifications: Specification[];
 };

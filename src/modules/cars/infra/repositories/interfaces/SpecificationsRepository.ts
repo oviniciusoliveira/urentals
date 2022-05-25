@@ -6,6 +6,7 @@ export type CreateSpecificationDTO = {
 };
 
 export interface SpecificationsRepositoryInterface {
-  create: (data: CreateSpecificationDTO) => Promise<void>;
+  create: (data: CreateSpecificationDTO) => Promise<Specification>;
   findByName: (name: string) => Promise<Specification | null>;
+  findByIds: (ids: string[]) => Promise<Specification[]>;
 }

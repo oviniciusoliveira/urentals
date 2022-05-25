@@ -16,14 +16,16 @@ export class SpecificationsRepositoryTypeORM implements SpecificationsRepository
     this.repository = getRepository(SpecificationTypeORM);
   }
 
-  async create({ name, description }: CreateSpecificationDTO): Promise<void> {
+  async create({ name, description }: CreateSpecificationDTO): Promise<Specification> {
     const newSpecification = this.repository.create({
       id: uuidV4(),
       name,
       description,
     });
 
-    await this.repository.save(newSpecification);
+    const specification = await this.repository.save(newSpecification);
+
+    return this.mapSpecificationFromTypeORM(specification);
   }
 
   async findByName(name: string): Promise<Specification | null> {
@@ -31,6 +33,16 @@ export class SpecificationsRepositoryTypeORM implements SpecificationsRepository
 
     if (!specification) return null;
 
+    return this.mapSpecificationFromTypeORM(specification);
+  }
+
+  async findByIds(ids: string[]): Promise<Specification[]> {
+    const specifications = await this.repository.findByIds(ids);
+
+    return specifications.map((specification) => this.mapSpecificationFromTypeORM(specification));
+  }
+
+  private mapSpecificationFromTypeORM(specification: SpecificationTypeORM): Specification {
     return {
       id: specification.id,
       name: specification.name,
