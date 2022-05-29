@@ -20,10 +20,16 @@ export class CreateCarSpecificationUseCase {
       throw new Error('Car not found');
     }
 
-    const specifications = await this.specificationsRepository.findByIds(specifications_id);
+    const specificationsIdsToBeAdded = specifications_id.filter(
+      (specification_id) => !car.specifications.some((specification) => specification.id === specification_id),
+    );
+
+    const newSpecifications = await this.specificationsRepository.findByIds(specificationsIdsToBeAdded);
+
+    const newCarSpecifications = [...car.specifications, ...newSpecifications];
 
     const newCar = await this.carsRepository.update(car_id, {
-      specifications,
+      specifications: newCarSpecifications,
     });
 
     if (!newCar) {

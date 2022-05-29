@@ -86,15 +86,20 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
       });
     }
 
-    const cars = await query.getMany();
+    const cars = await query.leftJoinAndSelect('car.specifications', 'specification').getMany();
 
     return cars.map((car) => this.mapCarFromTypeORM(car));
   }
 
   async findByID(id: string): Promise<Car | null> {
-    const car = await this.repository.findOne({
-      id,
-    });
+    const car = await this.repository.findOne(
+      {
+        id,
+      },
+      {
+        relations: ['specifications'],
+      },
+    );
 
     if (!car) return null;
 
