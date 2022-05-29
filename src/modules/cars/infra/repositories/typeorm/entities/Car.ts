@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { PrimaryColumn, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 
 import { CategoryTypeORM } from './Category';

@@ -46,6 +46,9 @@
 ### Requisitos funcionais
 - [ ] Deve ser possível cadastrar um aluguel para um carro e um usuário.
 
+### Requisitos não funcionais
+- [ ] Utilizar o multer para o upload dos arquivos
+
 ### Regras de negócio
 - [ ] O aluguel deve ter duração mínima de 24 horas
 - [ ] Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel corrente para o mesmo usuário.

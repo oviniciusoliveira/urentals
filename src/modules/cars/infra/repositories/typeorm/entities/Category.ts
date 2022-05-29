@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { PrimaryColumn, Column, CreateDateColumn, Entity } from 'typeorm';
 
 @Entity('categories')
