@@ -26,12 +26,17 @@ export class ListAvailableCarsController {
       });
     }
 
-    const cars = await this.listAvailableCarsUseCase.perform({
-      brand,
-      category_id,
-      name,
-    });
-
-    return response.status(200).json(cars);
+    try {
+      const cars = await this.listAvailableCarsUseCase.perform({
+        brand,
+        category_id,
+        name,
+      });
+      return response.status(200).json(cars);
+    } catch (error: any) {
+      return response.status(400).json({
+        message: error.message || 'Unexpected error.',
+      });
+    }
   }
 }

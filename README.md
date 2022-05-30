@@ -36,24 +36,22 @@
 
 ## Cadastro de imagens do carro
 ### Requisitos funcionais
-- [ ] Deve ser possível cadastrar a imagem do carro
+- [x] Deve ser possível cadastrar a imagem do carro
 
 ### Regras de negócio
-- [ ] O usuário deve poder cadastrar mais de uma imagem para o mesmo carro
-- [ ] O usuário responsável pelo cadastro deve ser um usuário administrador
+- [x] O usuário deve poder cadastrar mais de uma imagem para o mesmo carro
+- [x] O usuário responsável pelo cadastro deve ser um usuário administrador
+### Requisitos não funcionais
+- [x] Utilizar o multer para o upload dos arquivos
 
 ## Aluguel de carro
 ### Requisitos funcionais
-- [ ] Deve ser possível cadastrar um aluguel para um carro e um usuário.
-
-### Requisitos não funcionais
-- [ ] Utilizar o multer para o upload dos arquivos
-
+- [x] Deve ser possível cadastrar um aluguel para um carro e um usuário.
 ### Regras de negócio
-- [ ] O aluguel deve ter duração mínima de 24 horas
-- [ ] Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel corrente para o mesmo usuário.
-- [ ] Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel corrente para o mesmo carro.
-
+- [x] O aluguel deve ter duração mínima de 24 horas
+- [x] Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel corrente para o mesmo usuário.
+- [x] Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel corrente para o mesmo carro.
+- [ ] O usuário deve estar logado na aplicação
 ## Atualizar carro
 
 ### Requisitos funcionais

@@ -16,11 +16,16 @@ export class UploadCarImagesController {
 
     const imagesName = images.map((file) => file.filename);
 
-    await this.uploadCarImagesUseCase.perform({
-      carId: id,
-      imagesName,
-    });
-
-    return response.status(201).send();
+    try {
+      await this.uploadCarImagesUseCase.perform({
+        carId: id,
+        imagesName,
+      });
+      return response.status(201).send();
+    } catch (error: any) {
+      return response.status(400).json({
+        message: error.message || 'Unexpected error.',
+      });
+    }
   }
 }
