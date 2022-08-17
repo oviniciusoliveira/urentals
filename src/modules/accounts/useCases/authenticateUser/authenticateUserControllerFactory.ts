@@ -1,4 +1,3 @@
-import { env } from '../../../../config/env';
 import { CryptAdapter, TokenAdapter } from '../../../../shared/infra/adapters';
 import { UsersRepository } from '../../infra/repositories';
 import { AuthenticateUserController } from './AuthenticateUserController';
@@ -12,7 +11,7 @@ export function authenticateUserControllerFactory() {
     usersRepository,
     cryptAdapter,
     tokenAdapter,
-    env.secretTokenKey,
+    String(process.env.SECRET_TOKEN_KEY),
     Number(process.env.EXPIRATION_TOKEN_TIME),
   );
   return new AuthenticateUserController(authenticateUserUseCase);

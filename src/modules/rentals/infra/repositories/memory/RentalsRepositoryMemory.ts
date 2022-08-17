@@ -19,25 +19,19 @@ export class RentalsRepositoryMemory implements RentalsRepositoryInterface {
       total: null,
       updatedAt: null,
     };
-
     this.rentals.push(rental);
-
     return rental;
   }
 
   async findOpenRentalByCarId(carId: string): Promise<Rental | null> {
     const rental = this.rentals.find((rental) => rental.carId === carId && !rental.endDate);
-
     if (!rental) return null;
-
     return rental;
   }
 
   async findOpenRentalByUserId(userId: string): Promise<Rental | null> {
     const rental = this.rentals.find((rental) => rental.userId === userId && !rental.endDate);
-
     if (!rental) return null;
-
     return rental;
   }
 }

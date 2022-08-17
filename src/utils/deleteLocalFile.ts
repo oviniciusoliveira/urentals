@@ -5,6 +5,6 @@ export const deleteLocalFile = async (filePath: string) => {
     await fs.promises.stat(filePath);
     await fs.promises.unlink(filePath);
   } catch {
-    return;
+    throw new Error('Error deleting file');
   }
 };
