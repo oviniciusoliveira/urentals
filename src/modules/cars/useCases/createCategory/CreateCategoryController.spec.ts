@@ -10,7 +10,6 @@ describe('Create Category Controller', () => {
   beforeAll(async () => {
     connection = await createConnection();
     await connection.runMigrations();
-
     const id = uuidV4();
     const cryptAdapter = new CryptAdapter();
     const password = await cryptAdapter.encrypt('admin');

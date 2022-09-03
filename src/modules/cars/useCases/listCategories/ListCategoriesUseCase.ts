@@ -5,6 +5,7 @@ export class ListCategoriesUseCase {
   constructor(private categoriesRepository: CategoriesRepositoryInterface) {}
 
   async perform(): Promise<Category[]> {
-    return await this.categoriesRepository.list();
+    const categories = await this.categoriesRepository.list();
+    return categories;
   }
 }

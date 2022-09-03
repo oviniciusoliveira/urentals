@@ -1,8 +1,11 @@
+import { CarsRepositoryInterface } from '../../../cars/infra/repositories/interfaces/CarsRepository';
+import { CarsRepositoryMemory } from '../../../cars/infra/repositories/memory/CarsRepositoryMemory';
 import { RentalsRepositoryInterface } from '../../infra/interfaces/RentalsRepository';
 import { RentalsRepositoryMemory } from '../../infra/repositories/memory/RentalsRepositoryMemory';
 import { CreateRentalUseCase, minimumRentalDurationInMilliseconds } from './CreateRentalUseCase';
 
 let rentalsRepository: RentalsRepositoryInterface;
+let carsRepository: CarsRepositoryInterface;
 let createRentalUseCase: CreateRentalUseCase;
 const futureDateInMilliseconds = new Date().getTime() + minimumRentalDurationInMilliseconds + 1000 * 60;
 const futureDate = new Date(futureDateInMilliseconds);
@@ -10,7 +13,8 @@ const futureDate = new Date(futureDateInMilliseconds);
 describe('Create Rental', () => {
   beforeEach(() => {
     rentalsRepository = new RentalsRepositoryMemory();
-    createRentalUseCase = new CreateRentalUseCase(rentalsRepository);
+    carsRepository = new CarsRepositoryMemory();
+    createRentalUseCase = new CreateRentalUseCase(rentalsRepository, carsRepository);
   });
 
   it('should be able to create a new rental', async () => {

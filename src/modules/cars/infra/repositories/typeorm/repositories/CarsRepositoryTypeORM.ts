@@ -3,7 +3,12 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { Car } from '@/modules/cars/entities/Car';
 
-import { CarsRepositoryInterface, CreateCarDTO, FindAvailableCarsDTO } from '../../interfaces/CarsRepository';
+import {
+  CarsRepositoryInterface,
+  CreateCarDTO,
+  FindAvailableCarsDTO,
+  UpdateCarDTO,
+} from '../../interfaces/CarsRepository';
 import { CarTypeORM } from '../entities/Car';
 
 export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
@@ -39,13 +44,11 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
     return this.mapCarFromTypeORM(carSaved);
   }
 
-  async update(id: string, data: CreateCarDTO): Promise<Car | null> {
+  async update(id: string, data: UpdateCarDTO): Promise<Car | null> {
     const car = await this.repository.findOne({
       id,
     });
-
     if (!car) return null;
-
     const carUpdated = await this.repository.save({
       ...car,
       ...data,

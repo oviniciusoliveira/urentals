@@ -1,3 +1,5 @@
+import { CarsRepositoryInterface } from '@/modules/cars/infra/repositories/interfaces/CarsRepository';
+
 import { Rental } from '../../entities/Rental';
 import { RentalsRepositoryInterface } from '../../infra/interfaces/RentalsRepository';
 
@@ -10,7 +12,7 @@ type CreateRentalUseCaseData = {
 export const minimumRentalDurationInMilliseconds = 24 * 60 * 60 * 1000; // 1 day
 
 export class CreateRentalUseCase {
-  constructor(private rentalsRepository: RentalsRepositoryInterface) {}
+  constructor(private rentalsRepository: RentalsRepositoryInterface, private carsRepository: CarsRepositoryInterface) {}
 
   async perform({ carId, userId, expectedReturnDate }: CreateRentalUseCaseData): Promise<Rental> {
     const carAlreadyInRent = await this.rentalsRepository.findOpenRentalByCarId(carId);
@@ -36,6 +38,8 @@ export class CreateRentalUseCase {
       userId,
       expectedReturnDate,
     });
+
+    await this.carsRepository.update(carId, { available: false });
 
     return rental;
   }

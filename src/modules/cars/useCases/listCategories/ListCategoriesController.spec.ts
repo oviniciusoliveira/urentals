@@ -10,12 +10,11 @@ describe('List Category Controller', () => {
   beforeAll(async () => {
     connection = await createConnection();
     await connection.runMigrations();
-
     const id = uuidV4();
     const cryptAdapter = new CryptAdapter();
     const password = await cryptAdapter.encrypt('admin');
     await connection.query(
-      `INSERT INTO users(id, name, email, password, is_admin, driver_license) VALUES ('${id}', 'admin', 'admin@urentcars.com', '${password}', 'true', '55-55-55');`,
+      `INSERT INTO users(id, name, email, password, is_admin, driver_license) VALUES ('${id}', 'admin', 'admin2@urentcars.com', '${password}', 'true', '55-55-52');`,
     );
   });
 
@@ -26,7 +25,7 @@ describe('List Category Controller', () => {
 
   it('should be able to list all categories', async () => {
     const responseToken = await request(app).post('/authenticate').send({
-      email: 'admin@urentcars.com',
+      email: 'admin2@urentcars.com',
       password: 'admin',
     });
 
@@ -43,7 +42,6 @@ describe('List Category Controller', () => {
       });
 
     const response = await request(app).get('/categories');
-
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(1);
     expect(response.body[0]).toHaveProperty('id');

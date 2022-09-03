@@ -21,6 +21,7 @@ export type UpdateCarDTO = {
   brand?: string;
   category_id?: string;
   specifications?: Specification[];
+  available?: boolean;
 };
 
 export type FindAvailableCarsDTO = {
