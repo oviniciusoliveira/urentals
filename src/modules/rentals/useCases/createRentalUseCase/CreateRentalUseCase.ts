@@ -15,6 +15,11 @@ export class CreateRentalUseCase {
   constructor(private rentalsRepository: RentalsRepositoryInterface, private carsRepository: CarsRepositoryInterface) {}
 
   async perform({ carId, userId, expectedReturnDate }: CreateRentalUseCaseData): Promise<Rental> {
+    const car = await this.carsRepository.findByID(carId);
+    if (!car) {
+      throw new Error('Car not found');
+    }
+
     const carAlreadyInRent = await this.rentalsRepository.findOpenRentalByCarId(carId);
 
     if (carAlreadyInRent) {

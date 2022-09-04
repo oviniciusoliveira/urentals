@@ -14,7 +14,7 @@ describe('List Category Controller', () => {
     const cryptAdapter = new CryptAdapter();
     const password = await cryptAdapter.encrypt('admin');
     await connection.query(
-      `INSERT INTO users(id, name, email, password, is_admin, driver_license) VALUES ('${id}', 'admin', 'admin2@urentcars.com', '${password}', 'true', '55-55-52');`,
+      `INSERT INTO users(id, name, email, password, is_admin, driver_license) VALUES ('${id}', 'admin', 'admin@urentcars.com', '${password}', 'true', '55-55-52');`,
     );
   });
 
@@ -25,7 +25,7 @@ describe('List Category Controller', () => {
 
   it('should be able to list all categories', async () => {
     const responseToken = await request(app).post('/authenticate').send({
-      email: 'admin2@urentcars.com',
+      email: 'admin@urentcars.com',
       password: 'admin',
     });
 

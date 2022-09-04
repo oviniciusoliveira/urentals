@@ -46,6 +46,12 @@ export class RentalsRepositioryTypeORM implements RentalsRepositoryInterface {
     return this.mapRentalFroMTypeORM(rental);
   }
 
+  async findById(id: string): Promise<Rental | null> {
+    const rental = await this.repository.findOne(id);
+    if (!rental) return null;
+    return this.mapRentalFroMTypeORM(rental);
+  }
+
   private mapRentalFroMTypeORM(rental: RentalTypeORM): Rental {
     return {
       id: rental.id,

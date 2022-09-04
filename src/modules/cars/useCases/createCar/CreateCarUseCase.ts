@@ -24,7 +24,7 @@ export class CreateCarUseCase {
     category_id,
   }: CreateCarData): Promise<Car> {
     const carAlreadyExists = await this.carsRepository.findByLicensePlate(license_plate);
-
+    // TODO: validate if category exists
     if (carAlreadyExists) {
       throw new Error('Car with this license plate already exists');
     }

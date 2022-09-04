@@ -10,10 +10,13 @@ async function create() {
   const id = uuidV4();
   const cryptAdapter = new CryptAdapter();
   // TODO - move to env config
+  const name = 'admin';
+  const email = 'admin@urentcars.com';
+  const driverLicense = '55-55-55';
   const password = await cryptAdapter.encrypt('admin');
 
   await connection.query(
-    `INSERT INTO users(id, name, email, password, is_admin, driver_license) VALUES ('${id}', 'admin', 'admin@urentcars.com', '${password}', 'true', '55-55-55');`,
+    `INSERT INTO users(id, name, email, password, is_admin, driver_license) VALUES ('${id}', '${name}', '${email}', '${password}', 'true', '${driverLicense}');`,
   );
 
   await connection.close();
