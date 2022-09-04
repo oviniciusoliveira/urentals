@@ -1,6 +1,9 @@
+import { Car } from '@/modules/cars/entities/Car';
+
 export type Rental = {
   id: string;
   carId: string;
+  car?: Car;
   userId: string;
   startDate: Date;
   endDate: Date | null;

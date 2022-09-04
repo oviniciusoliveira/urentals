@@ -41,7 +41,7 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
 
     const carSaved: CarTypeORM = await this.repository.save(car);
 
-    return this.mapCarFromTypeORM(carSaved);
+    return CarsRepositoryTypeORM.mapCarFromTypeORM(carSaved);
   }
 
   async update(id: string, data: UpdateCarDTO): Promise<Car | null> {
@@ -53,7 +53,7 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
       ...car,
       ...data,
     });
-    return this.mapCarFromTypeORM(carUpdated);
+    return CarsRepositoryTypeORM.mapCarFromTypeORM(carUpdated);
   }
 
   async findByLicensePlate(license_plate: string): Promise<Car | null> {
@@ -63,7 +63,7 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
 
     if (!car) return null;
 
-    return this.mapCarFromTypeORM(car);
+    return CarsRepositoryTypeORM.mapCarFromTypeORM(car);
   }
 
   async findAvailable({ brand, category_id, name }: FindAvailableCarsDTO): Promise<Car[]> {
@@ -91,7 +91,7 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
 
     const cars = await query.leftJoinAndSelect('car.specifications', 'specification').getMany();
 
-    return cars.map((car) => this.mapCarFromTypeORM(car));
+    return cars.map((car) => CarsRepositoryTypeORM.mapCarFromTypeORM(car));
   }
 
   async findByID(id: string): Promise<Car | null> {
@@ -106,10 +106,10 @@ export class CarsRepositoryTypeORM implements CarsRepositoryInterface {
 
     if (!car) return null;
 
-    return this.mapCarFromTypeORM(car);
+    return CarsRepositoryTypeORM.mapCarFromTypeORM(car);
   }
 
-  private mapCarFromTypeORM(car: CarTypeORM): Car {
+  static mapCarFromTypeORM(car: CarTypeORM): Car {
     return {
       id: car.id,
       available: car.available,

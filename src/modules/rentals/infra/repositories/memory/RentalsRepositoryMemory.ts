@@ -2,7 +2,7 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { Rental } from '@/modules/rentals/entities/Rental';
 
-import { CreateRentalDTO, RentalsRepositoryInterface } from '../../interfaces/RentalsRepository';
+import { CreateRentalDTO, RentalsRepositoryInterface, UpdateRentalDTO } from '../../interfaces/RentalsRepository';
 
 export class RentalsRepositoryMemory implements RentalsRepositoryInterface {
   private rentals: Rental[] = [];
@@ -33,5 +33,12 @@ export class RentalsRepositoryMemory implements RentalsRepositoryInterface {
     const rental = this.rentals.find((rental) => rental.userId === userId && !rental.endDate);
     if (!rental) return null;
     return rental;
+  }
+
+  update(id: string, data: UpdateRentalDTO): Promise<Rental> {
+    throw new Error('Method not implemented.');
+  }
+  findById(id: string): Promise<Rental | null> {
+    throw new Error('Method not implemented.');
   }
 }

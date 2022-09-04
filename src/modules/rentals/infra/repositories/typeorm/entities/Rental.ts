@@ -1,9 +1,17 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+
+import { CarTypeORM } from '../../../../../cars/infra/repositories/typeorm/entities/Car';
 
 @Entity('rentals')
 export class RentalTypeORM {
   @PrimaryColumn()
   id!: string;
+
+  @ManyToOne(() => CarTypeORM)
+  @JoinColumn({
+    name: 'car_id',
+  })
+  car?: CarTypeORM;
 
   @Column()
   car_id!: string;
@@ -23,9 +31,9 @@ export class RentalTypeORM {
   @Column()
   total?: number;
 
-  @Column()
-  created_at!: string;
+  @CreateDateColumn()
+  created_at!: Date;
 
-  @Column()
-  updated_at?: string;
+  @UpdateDateColumn()
+  updated_at?: Date;
 }

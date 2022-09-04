@@ -3,6 +3,7 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { Rental } from '@/modules/rentals/entities/Rental';
 
+import { CarsRepositoryTypeORM } from '../../../../cars/infra/repositories/typeorm/repositories/CarsRepositoryTypeORM';
 import { CreateRentalDTO, RentalsRepositoryInterface, UpdateRentalDTO } from '../../interfaces/RentalsRepository';
 import { RentalTypeORM } from './entities/Rental';
 
@@ -76,8 +77,21 @@ export class RentalsRepositioryTypeORM implements RentalsRepositoryInterface {
     return this.mapRentalFromTypeORM(rental);
   }
 
+  async findByUser(userId: string): Promise<Rental[]> {
+    const rentals = await this.repository.find({
+      where: { user_id: userId },
+      relations: ['car'],
+    });
+
+    return this.mapRentalsFromTypeORM(rentals);
+  }
+
+  private mapRentalsFromTypeORM(rentals: RentalTypeORM[]): Rental[] {
+    return rentals.map((rental) => this.mapRentalFromTypeORM(rental));
+  }
+
   private mapRentalFromTypeORM(rental: RentalTypeORM): Rental {
-    return {
+    const mappedRental: Rental = {
       id: rental.id,
       carId: rental.car_id,
       createdAt: new Date(rental.created_at),
@@ -88,5 +102,7 @@ export class RentalsRepositioryTypeORM implements RentalsRepositoryInterface {
       updatedAt: rental.updated_at ? new Date(rental.updated_at) : null,
       userId: rental.user_id,
     };
+    Object.assign(mappedRental, rental.car ? { car: CarsRepositoryTypeORM.mapCarFromTypeORM(rental.car) } : null);
+    return mappedRental;
   }
 }
