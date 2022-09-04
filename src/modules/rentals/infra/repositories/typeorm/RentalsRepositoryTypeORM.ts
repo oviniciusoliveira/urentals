@@ -3,7 +3,7 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { Rental } from '@/modules/rentals/entities/Rental';
 
-import { CreateRentalDTO, RentalsRepositoryInterface } from '../../interfaces/RentalsRepository';
+import { CreateRentalDTO, RentalsRepositoryInterface, UpdateRentalDTO } from '../../interfaces/RentalsRepository';
 import { RentalTypeORM } from './entities/Rental';
 
 export class RentalsRepositioryTypeORM implements RentalsRepositoryInterface {
@@ -23,36 +23,60 @@ export class RentalsRepositioryTypeORM implements RentalsRepositoryInterface {
 
     const rentalSaved: RentalTypeORM = await this.repository.save(rental);
 
-    return this.mapRentalFroMTypeORM(rentalSaved);
+    return this.mapRentalFromTypeORM(rentalSaved);
+  }
+
+  async update(id: string, data: UpdateRentalDTO): Promise<Rental> {
+    const updateRental = {
+      end_date: data.endDate,
+      total: data.total,
+    };
+    const updateRentalCleared = Object.fromEntries(Object.entries(updateRental).filter(([_, v]) => v != null));
+    const result = await this.repository
+      .createQueryBuilder()
+      .update(updateRentalCleared)
+      .where({
+        id,
+      })
+      .returning('*')
+      .execute();
+
+    return this.mapRentalFromTypeORM(result.raw[0]);
   }
 
   async findOpenRentalByCarId(car_id: string): Promise<Rental | null> {
     const rental = await this.repository.findOne({
-      car_id,
+      where: {
+        car_id,
+        end_date: null,
+      },
     });
 
     if (!rental) return null;
 
-    return this.mapRentalFroMTypeORM(rental);
+    return this.mapRentalFromTypeORM(rental);
   }
 
   async findOpenRentalByUserId(user_id: string): Promise<Rental | null> {
     const rental = await this.repository.findOne({
-      user_id,
+      where: {
+        user_id,
+        end_date: null,
+      },
     });
 
     if (!rental) return null;
 
-    return this.mapRentalFroMTypeORM(rental);
+    return this.mapRentalFromTypeORM(rental);
   }
 
   async findById(id: string): Promise<Rental | null> {
     const rental = await this.repository.findOne(id);
     if (!rental) return null;
-    return this.mapRentalFroMTypeORM(rental);
+    return this.mapRentalFromTypeORM(rental);
   }
 
-  private mapRentalFroMTypeORM(rental: RentalTypeORM): Rental {
+  private mapRentalFromTypeORM(rental: RentalTypeORM): Rental {
     return {
       id: rental.id,
       carId: rental.car_id,
@@ -60,7 +84,7 @@ export class RentalsRepositioryTypeORM implements RentalsRepositoryInterface {
       endDate: rental.end_date ? new Date(rental.end_date) : null,
       expectedReturnDate: new Date(rental.expected_return_date),
       startDate: new Date(rental.start_date),
-      total: rental.total || null,
+      total: Number(rental.total) || null,
       updatedAt: rental.updated_at ? new Date(rental.updated_at) : null,
       userId: rental.user_id,
     };

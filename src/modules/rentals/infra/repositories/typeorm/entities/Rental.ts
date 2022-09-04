@@ -27,5 +27,5 @@ export class RentalTypeORM {
   created_at!: string;
 
   @Column()
-  updated_at?: Date;
+  updated_at?: string;
 }

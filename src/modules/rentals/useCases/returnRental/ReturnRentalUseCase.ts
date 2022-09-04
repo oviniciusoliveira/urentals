@@ -6,7 +6,6 @@ import { RentalsRepositoryInterface } from '../../infra/interfaces/RentalsReposi
 
 type ReturnRentalUseCaseData = {
   rentalId: string;
-  userId: string;
 };
 
 export class ReturnRentalUseCase {
@@ -22,6 +21,9 @@ export class ReturnRentalUseCase {
     const rental = await this.rentalsRepository.findById(rentalId);
     if (!rental) {
       throw new Error('Rental does not exists');
+    }
+    if (rental.endDate !== null) {
+      throw new Error('This rental is already closed');
     }
     const car = await this.carsRepository.findByID(rental.carId);
     if (!car) {
@@ -42,7 +44,7 @@ export class ReturnRentalUseCase {
     rental.endDate = new Date();
     rental.total = total;
 
-    await this.rentalsRepository.update(rental.id, {
+    const rentalUpdated = await this.rentalsRepository.update(rental.id, {
       total: rental.total,
       endDate: rental.endDate,
     });
@@ -50,6 +52,6 @@ export class ReturnRentalUseCase {
       available: true,
     });
 
-    return rental;
+    return rentalUpdated;
   }
 }
