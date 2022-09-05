@@ -1,6 +1,6 @@
-openapi: "3.0.3"
+openapi: '3.0.3'
 info:
-  version: "1.0.0"
+  version: '1.0.0'
   title: uRentalCars API Documentation
   description: uRentalCars API documentation using Swagger
   contact:
@@ -12,11 +12,13 @@ paths:
     post:
       summary: Create a new category
       description: Create a new car category
+      security:
+        - bearerAuth: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CategoryCreate"
+              $ref: '#/components/schemas/CategoryCreate'
             example:
               name: Category name sample
               description: Category description sample
@@ -33,21 +35,22 @@ paths:
       summary: List all categories
       description: List all car categories
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Category"
-
+                  $ref: '#/components/schemas/Category'
 
   /categories/import:
     post:
       tags:
         - category
       summary: Import specifications
+      security:
+        - bearerAuth: []
       description: Import a list of specifications from a csv file
       requestBody:
         content:
@@ -66,36 +69,74 @@ paths:
     post:
       summary: Create a new specification
       description: Create a new car specification
+      security:
+        - bearerAuth: []
       tags:
         - specification
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SpecificationCreate"
+              $ref: '#/components/schemas/SpecificationCreate'
       responses:
         201:
           description: Created
         400:
           description: Specification already exists
 
+  /authenticate:
+    post:
+      tags:
+        - session
+      summary: Authentication user
+      description: Authenticate a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionSchema'
+      responses:
+        200:
+          description: Success
+        400:
+          description: Email or password invalid
 
-tags:
-  - name: category
-    description: Car category
+  /cars:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - cars
+      summary: 'Create a new car'
+      description: Create a new car
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        201:
+          description: Created
+        400:
+          description: Car with this license plate already exists
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: jwt
   schemas:
     Category:
-        type: object
-        properties:
-          id:
-            type: string
-          name:
-            type: string
-          description:
-            type: string
-          created_at:
-            type: string
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        created_at:
+          type: string
 
     CategoryCreate:
       type: object
@@ -119,4 +160,28 @@ components:
         - name
         - description
 
+    SessionSchema:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
 
+    Car:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        daily_rate:
+          type: number
+        license_plate:
+          type: string
+        fine_amount:
+          type: number
+        brand:
+          type: string
+        category_id:
+          type: string
