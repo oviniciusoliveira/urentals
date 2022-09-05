@@ -119,6 +119,36 @@ paths:
           description: Created
         400:
           description: Car with this license plate already exists
+
+  /cars/{id}/images:
+    post:
+      tags:
+        - cars
+      summary: Upload images
+      description: Upload images to a car
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Card Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                images:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        201:
+          description: Created
 components:
   securitySchemes:
     bearerAuth:
