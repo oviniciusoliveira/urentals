@@ -1,5 +1,4 @@
-import { CarsRepositoryInterface } from '@/modules/cars/infra/repositories/interfaces/CarsRepository';
-
+import { CarsRepositoryInterface } from '../../../cars/infra/repositories/interfaces/CarsRepository';
 import { Rental } from '../../entities/Rental';
 import { RentalsRepositoryInterface } from '../../infra/interfaces/RentalsRepository';
 

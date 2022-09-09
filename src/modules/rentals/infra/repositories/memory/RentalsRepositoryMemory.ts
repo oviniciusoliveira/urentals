@@ -35,10 +35,28 @@ export class RentalsRepositoryMemory implements RentalsRepositoryInterface {
     return rental;
   }
 
-  update(id: string, data: UpdateRentalDTO): Promise<Rental> {
-    throw new Error('Method not implemented.');
+  async update(id: string, data: UpdateRentalDTO): Promise<Rental> {
+    const rentalSavedIndex = this.rentals.findIndex((rental) => rental.id === id);
+    if (rentalSavedIndex < 0) {
+      throw new Error('Rental not found');
+    }
+    const updateDataWithoutNullFields = Object.fromEntries(Object.entries(data).filter(([_, v]) => v != null));
+    this.rentals[rentalSavedIndex] = {
+      ...this.rentals[rentalSavedIndex],
+      ...updateDataWithoutNullFields,
+    };
+    return this.rentals[rentalSavedIndex];
   }
-  findById(id: string): Promise<Rental | null> {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<Rental | null> {
+    const rental = this.rentals.find((rental) => rental.id === id);
+    if (!rental) {
+      return null;
+    }
+    return rental;
+  }
+
+  async findByUser(userId: string): Promise<Rental[]> {
+    const rentals = this.rentals.filter((rental) => rental.userId === userId);
+    return rentals;
   }
 }
