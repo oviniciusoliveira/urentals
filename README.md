@@ -11,6 +11,7 @@
 - [x] Não deve ser possível cadastrar um carro com uma placa já existente.
 - [x] O carro deve ser cadastrado por padrão como disponível.
 - [x] O usuário responsável pelo cadastro deve ser um administrador.
+- [ ] Não deve ser possível cadastrar carro em uma categoria inexistente
 
 ## Categorias de carro
 
