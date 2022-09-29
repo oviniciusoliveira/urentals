@@ -37,7 +37,7 @@ export class UsersRepositoryTypeORM implements UsersRepositoryInterface {
 
     if (!user) return null;
 
-    return this.mapUserFromTypeORM(user);
+    return UsersRepositoryTypeORM.mapUserFromTypeORM(user);
   }
 
   async findByID(id: string): Promise<User | null> {
@@ -47,14 +47,14 @@ export class UsersRepositoryTypeORM implements UsersRepositoryInterface {
 
     if (!user) return null;
 
-    return this.mapUserFromTypeORM(user);
+    return UsersRepositoryTypeORM.mapUserFromTypeORM(user);
   }
 
   async update(id: string, data: UpdateUserDTO): Promise<void> {
     await this.repository.update(id, data);
   }
 
-  private mapUserFromTypeORM(user: UserTypeORM): User {
+  public static mapUserFromTypeORM(user: UserTypeORM): User {
     return {
       id: user.id,
       createdAt: user.created_at,

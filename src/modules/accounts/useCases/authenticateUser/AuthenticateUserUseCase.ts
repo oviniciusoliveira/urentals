@@ -1,6 +1,9 @@
+import { DateAdapterInterface } from '@/shared/infra/adapters/interfaces/DateAdapter';
+
 import { CryptAdapterInterface } from '../../../../shared/infra/adapters/interfaces/CryptAdapter';
 import { TokenAdapterInterface } from '../../../../shared/infra/adapters/interfaces/TokenAdapter';
 import { UsersRepositoryInterface } from '../../infra/repositories/interfaces/UsersRepository';
+import { UsersTokensRepositoryInterface } from '../../infra/repositories/interfaces/UsersTokensRepository';
 
 type AuthenticateUserData = {
   email: string;
@@ -9,6 +12,7 @@ type AuthenticateUserData = {
 
 type AuthenticateUserResponse = {
   token: string;
+  refreshToken: string;
   user: {
     email: string;
     id: string;
@@ -19,10 +23,14 @@ type AuthenticateUserResponse = {
 export class AuthenticateUserUseCase {
   constructor(
     private usersRepository: UsersRepositoryInterface,
+    private usersTokensRepository: UsersTokensRepositoryInterface,
     private cryptAdapter: CryptAdapterInterface,
     private tokenAdapter: TokenAdapterInterface,
+    private dateAdapter: DateAdapterInterface,
     private secretTokenKey: string,
-    private expirationTime: number,
+    private expirationTokenTime: number,
+    private secretRefreshTokenKey: string,
+    private expirationRefreshTokenTime: number,
   ) {}
 
   async perform({ email, password }: AuthenticateUserData): Promise<AuthenticateUserResponse> {
@@ -38,10 +46,26 @@ export class AuthenticateUserUseCase {
       throw new Error('Password incorrect');
     }
 
-    const token = await this.tokenAdapter.generateToken({}, this.secretTokenKey, user.id, this.expirationTime);
+    const token = await this.tokenAdapter.generateToken({}, this.secretTokenKey, user.id, this.expirationTokenTime);
+
+    const refreshToken = await this.tokenAdapter.generateToken(
+      { email: email },
+      this.secretRefreshTokenKey,
+      user.id,
+      this.expirationRefreshTokenTime,
+    );
+
+    const expirationRefreshTokenTimeInDays = this.expirationRefreshTokenTime / (24 * 60 * 60);
+
+    await this.usersTokensRepository.create({
+      userId: user.id,
+      refreshToken,
+      expiresDate: this.dateAdapter.addDays(new Date(), expirationRefreshTokenTimeInDays),
+    });
 
     return {
       token,
+      refreshToken,
       user: {
         id: user.id,
         name: user.name,

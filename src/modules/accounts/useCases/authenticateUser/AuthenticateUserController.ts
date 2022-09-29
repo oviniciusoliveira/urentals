@@ -9,15 +9,12 @@ export class AuthenticateUserController {
     const { email, password } = request.body;
 
     try {
-      const { token, user } = await this.authenticateUserUseCase.perform({
+      const session = await this.authenticateUserUseCase.perform({
         email,
         password,
       });
 
-      return response.status(200).json({
-        token,
-        user,
-      });
+      return response.status(200).json({ ...session });
     } catch (error: any) {
       return response.status(400).json(error.message);
     }

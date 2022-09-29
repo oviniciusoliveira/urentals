@@ -9,4 +9,10 @@ export class DateAdapterDate implements DateAdapterInterface {
 
     return Math.floor((endDateUTC - startDatUTC) / this._MS_PER_DAY);
   }
+
+  addDays(date: Date, days: number): Date {
+    const newDate = new Date(date);
+    newDate.setDate(date.getDate() + days);
+    return newDate;
+  }
 }
