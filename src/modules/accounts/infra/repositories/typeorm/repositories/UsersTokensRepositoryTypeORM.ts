@@ -24,6 +24,16 @@ export class UsersTokensRepositoryTypeORM implements UsersTokensRepositoryInterf
     return UsersTokensRepositoryTypeORM.mapUserTokenFromTypeORM(token);
   }
 
+  async findByUserIdAndRefreshToken(userId: string, refreshToken: string): Promise<UserTokens | null> {
+    const userToken = await this.repository.findOne({ user_id: userId, refresh_token: refreshToken });
+    if (!userToken) return null;
+    return UsersTokensRepositoryTypeORM.mapUserTokenFromTypeORM(userToken);
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
+
   private static mapUserTokenFromTypeORM(token: UserTokensTypeORM): UserTokens {
     return {
       id: token.id,

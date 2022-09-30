@@ -8,4 +8,6 @@ export type CreateUserTokenDTO = {
 
 export interface UsersTokensRepositoryInterface {
   create(data: CreateUserTokenDTO): Promise<UserTokens>;
+  findByUserIdAndRefreshToken(userId: string, refreshToken: string): Promise<UserTokens | null>;
+  delete(id: string): Promise<void>;
 }
