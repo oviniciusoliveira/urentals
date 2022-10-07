@@ -10,6 +10,7 @@ export type CreateUserDTO = {
 
 export type UpdateUserDTO = {
   avatar?: string;
+  password?: string;
 };
 
 export interface UsersRepositoryInterface {

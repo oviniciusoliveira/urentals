@@ -15,4 +15,14 @@ export class DateAdapterDate implements DateAdapterInterface {
     newDate.setDate(date.getDate() + days);
     return newDate;
   }
+
+  addHours(date: Date, hours: number): Date {
+    const newDate = new Date(date);
+    newDate.setHours(newDate.getHours() + hours);
+    return newDate;
+  }
+
+  isBefore(referenceDate: Date, dateToCompare: Date): boolean {
+    return referenceDate > dateToCompare;
+  }
 }
