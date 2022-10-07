@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore node_modules --respawn src/shared/infra/express/server.ts",
     "typeorm": "ts-node ./node_modules/typeorm/cli",
-    "test": "NODE_ENV=test jest --coverage=false --runInBand --detectOpenHandles",
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
     "test:watch": "npm run test -- --watch",
     "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
   },
