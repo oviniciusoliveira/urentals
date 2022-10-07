@@ -1,31 +1,43 @@
 import { CryptAdapterBcrypt } from '../../../../shared/infra/adapters/bcrypt/CryptAdapterBcrypt';
+import { DateAdapterDate } from '../../../../shared/infra/adapters/date/DateAdapterDate';
 import { CryptAdapterInterface } from '../../../../shared/infra/adapters/interfaces/CryptAdapter';
+import { DateAdapterInterface } from '../../../../shared/infra/adapters/interfaces/DateAdapter';
 import { TokenAdapterInterface } from '../../../../shared/infra/adapters/interfaces/TokenAdapter';
 import { TokenAdapterJWT } from '../../../../shared/infra/adapters/jsonwebtoken/TokenAdapterJWT';
 import { CreateUserDTO, UsersRepositoryInterface } from '../../infra/repositories/interfaces/UsersRepository';
+import { UsersTokensRepositoryInterface } from '../../infra/repositories/interfaces/UsersTokensRepository';
 import { UsersRepositoryMemory } from '../../infra/repositories/memory/UsersRepositoryMemory';
+import { UsersTokensRepositoryMemory } from '../../infra/repositories/memory/UsersTokensRepositoryMemory';
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
 let authenticateUserUseCase: AuthenticateUserUseCase;
-let usersRepositoryMemory: UsersRepositoryInterface;
+let usersRepository: UsersRepositoryInterface;
 let cryptAdapter: CryptAdapterInterface;
 let tokenAdapter: TokenAdapterInterface;
 let createUserUseCase: CreateUserUseCase;
+let usersTokensRepository: UsersTokensRepositoryInterface;
+let dateAdapter: DateAdapterInterface;
 
 describe('Authenticate User', () => {
   beforeEach(() => {
-    usersRepositoryMemory = new UsersRepositoryMemory();
+    usersRepository = new UsersRepositoryMemory();
     cryptAdapter = new CryptAdapterBcrypt();
     tokenAdapter = new TokenAdapterJWT();
+    usersTokensRepository = new UsersTokensRepositoryMemory();
+    dateAdapter = new DateAdapterDate();
     authenticateUserUseCase = new AuthenticateUserUseCase(
-      usersRepositoryMemory,
+      usersRepository,
+      usersTokensRepository,
       cryptAdapter,
       tokenAdapter,
-      'secret',
+      dateAdapter,
+      'secret-token-key',
       3600,
+      'secret-refresh-token-key',
+      600,
     );
-    createUserUseCase = new CreateUserUseCase(usersRepositoryMemory, cryptAdapter);
+    createUserUseCase = new CreateUserUseCase(usersRepository, cryptAdapter);
   });
 
   it('should be able authenticate a user', async () => {
