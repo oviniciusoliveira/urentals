@@ -1,6 +1,6 @@
 import nodemailer, { Transporter } from 'nodemailer';
 
-import { MailAdapterInterface } from '../interfaces/MailAdapter';
+import { MailAdapterInterface } from '../../interfaces/MailAdapter';
 
 export class MailAdapterEthereal implements MailAdapterInterface {
   private readonly systemEmail = 'noreply@urentcars.com';
