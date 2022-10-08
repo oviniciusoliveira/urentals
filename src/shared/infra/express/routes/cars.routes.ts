@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { uploadConfig } from '../../../../config/upload';
+import { multerConfig } from '../../../../config/multer';
 import { createCarControllerFactory } from '../../../../modules/cars/useCases/createCar/createCarControllerFactory';
 import { createCarSpecificationControllerFactory } from '../../../../modules/cars/useCases/createCarSpecification/createCarSpecificationControllerFactory';
 import { listAvailableCarsControllerFactory } from '../../../../modules/cars/useCases/listAvailableCars/listAvailableCarsControllerFactory';
@@ -11,7 +11,7 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 export const carsRoutes = Router();
 
-const uploadCarImages = multer(uploadConfig.upload('./temp/cars'));
+const uploadCarImages = multer(multerConfig);
 
 carsRoutes.post('/', ensureAuthenticated, ensureAdmin, async (request, response) => {
   const createCarController = createCarControllerFactory();

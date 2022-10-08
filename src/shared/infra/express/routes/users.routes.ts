@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { uploadConfig } from '../../../../config/upload';
+import { multerConfig } from '../../../../config/multer';
 import { createUserControllerFactory } from '../../../../modules/accounts/useCases/createUser/createUserControllerFactory';
 import { updateUserAvatarControllerFactory } from '../../../../modules/accounts/useCases/updateUserAvatar/updateUserAvatarControllerFactory';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 export const usersRoutes = Router();
 
-const uploadAvatar = multer(uploadConfig.upload('./temp/avatar'));
+const uploadAvatar = multer(multerConfig);
 
 usersRoutes.post('/', uploadAvatar.single('avatar'), async (request, response) => {
   const createUserController = createUserControllerFactory();

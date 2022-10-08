@@ -1,4 +1,5 @@
-import { deleteLocalFile } from '../../../../utils/deleteLocalFile';
+import { StorageAdapterInterface } from '@/shared/infra/adapters/interfaces/StorageAdapter';
+
 import { UsersRepositoryInterface } from '../../infra/repositories/interfaces/UsersRepository';
 
 type UpdateUserAvatarData = {
@@ -7,7 +8,7 @@ type UpdateUserAvatarData = {
 };
 
 export class UpdateUserAvatarUseCase {
-  constructor(private usersRepository: UsersRepositoryInterface) {}
+  constructor(private usersRepository: UsersRepositoryInterface, private storageAdapter: StorageAdapterInterface) {}
 
   async perform({ userID, avatarFile }: UpdateUserAvatarData) {
     const user = await this.usersRepository.findByID(userID);
@@ -17,8 +18,10 @@ export class UpdateUserAvatarUseCase {
     }
 
     if (user.avatar) {
-      await deleteLocalFile(`./temp/avatar/${user.avatar}`);
+      await this.storageAdapter.delete(user.avatar, 'avatar');
     }
+
+    await this.storageAdapter.save(avatarFile, 'avatar');
 
     await this.usersRepository.update(userID, {
       avatar: avatarFile,
