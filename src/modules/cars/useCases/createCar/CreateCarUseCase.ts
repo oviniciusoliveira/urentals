@@ -1,5 +1,6 @@
 import { Car } from '../../entities/Car';
 import { CarsRepositoryInterface } from '../../infra/repositories/interfaces/CarsRepository';
+import { CategoriesRepositoryInterface } from '../../infra/repositories/interfaces/CategoriesRepository';
 
 type CreateCarData = {
   name: string;
@@ -12,7 +13,10 @@ type CreateCarData = {
 };
 
 export class CreateCarUseCase {
-  constructor(private carsRepository: CarsRepositoryInterface) {}
+  constructor(
+    private carsRepository: CarsRepositoryInterface,
+    private categoriesRepository: CategoriesRepositoryInterface,
+  ) {}
 
   async perform({
     name,
@@ -27,6 +31,11 @@ export class CreateCarUseCase {
     // TODO: validate if category exists
     if (carAlreadyExists) {
       throw new Error('Car with this license plate already exists');
+    }
+
+    const category = await this.categoriesRepository.findById(category_id);
+    if (!category) {
+      throw new Error('Category not found');
     }
 
     const car = await this.carsRepository.create({

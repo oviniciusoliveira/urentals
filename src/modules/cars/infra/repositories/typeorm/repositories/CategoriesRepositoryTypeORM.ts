@@ -24,12 +24,7 @@ export class CategoriesRepositoryTypeORM implements CategoriesRepositoryInterfac
 
   async list(): Promise<Category[]> {
     const categories = await this.repository.find();
-    return categories.map((category) => ({
-      id: category.id,
-      name: category.name,
-      createdAt: category.created_at,
-      description: category.description,
-    }));
+    return categories.map((category) => this.map(category));
   }
 
   async findByName(name: string): Promise<Category | null> {
@@ -37,6 +32,18 @@ export class CategoriesRepositoryTypeORM implements CategoriesRepositoryInterfac
 
     if (!category) return null;
 
+    return this.map(category);
+  }
+
+  async findById(id: string): Promise<Category | null> {
+    const category = await this.repository.findOne(id);
+
+    if (!category) return null;
+
+    return this.map(category);
+  }
+
+  private map(category: CategoryTypeORM): Category {
     return {
       id: category.id,
       name: category.name,
