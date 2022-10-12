@@ -6,7 +6,7 @@ import { StorageAdapterS3 } from './storage/s3/StorageAdapterS3';
 export { CryptAdapterBcrypt as CryptAdapter } from './bcrypt/CryptAdapterBcrypt';
 export { TokenAdapterJWT as TokenAdapter } from './jsonwebtoken/TokenAdapterJWT';
 export { DateAdapterDate as DateAdapter } from './date/DateAdapterDate';
-export { MailAdapterEthereal as MailAdapter } from './mail/ethereal/MailAdapterEthereal';
+export { MailAdapterSES as MailAdapter } from './mail/ses/MailAdapterSES';
 
 export { StorageAdapterLocal } from './storage/local/StorageAdapterLocal';
 
