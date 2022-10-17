@@ -1,4 +1,4 @@
-import { Car } from '@/modules/cars/entities/Car';
+import { Car } from 'src/modules/cars/entities/Car';
 
 import { CarsRepositoryInterface } from '../../../cars/infra/repositories/interfaces/CarsRepository';
 import { CarsRepositoryMemory } from '../../../cars/infra/repositories/memory/CarsRepositoryMemory';

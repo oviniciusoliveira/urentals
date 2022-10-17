@@ -1,7 +1,6 @@
+import { UserTokens } from 'src/modules/accounts/entities/UserTokens';
 import { getRepository, Repository } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
-
-import { UserTokens } from '@/modules/accounts/entities/UserTokens';
 
 import { CreateUserTokenDTO, UsersTokensRepositoryInterface } from '../../interfaces/UsersTokensRepository';
 import { UserTokensTypeORM } from '../entities/UserTokens';

@@ -1,5 +1,5 @@
-import { CarsRepositoryInterface } from '@/modules/cars/infra/repositories/interfaces/CarsRepository';
-import { DateAdapterInterface } from '@/shared/infra/adapters/interfaces/DateAdapter';
+import { CarsRepositoryInterface } from 'src/modules/cars/infra/repositories/interfaces/CarsRepository';
+import { DateAdapterInterface } from 'src/shared/infra/adapters/interfaces/DateAdapter';
 
 import { Rental } from '../../entities/Rental';
 import { RentalsRepositoryInterface } from '../../infra/interfaces/RentalsRepository';

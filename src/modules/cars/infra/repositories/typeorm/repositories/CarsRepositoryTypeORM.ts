@@ -1,7 +1,6 @@
+import { Car } from 'src/modules/cars/entities/Car';
 import { getRepository, Repository } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
-
-import { Car } from '@/modules/cars/entities/Car';
 
 import {
   CarsRepositoryInterface,

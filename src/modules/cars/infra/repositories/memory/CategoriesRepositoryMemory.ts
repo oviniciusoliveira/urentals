@@ -32,4 +32,10 @@ export class CategoriesRepositoryMemory implements CategoriesRepositoryInterface
 
     return category;
   }
+
+  async findById(id: string): Promise<Category | null> {
+    const category = this.categories.find((c) => c.id === id);
+    if (!category) return null;
+    return category;
+  }
 }

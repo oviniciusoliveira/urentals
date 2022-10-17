@@ -1,4 +1,4 @@
-import { UserTokens } from '@/modules/accounts/entities/UserTokens';
+import { UserTokens } from 'src/modules/accounts/entities/UserTokens';
 
 export type CreateUserTokenDTO = {
   userId: string;

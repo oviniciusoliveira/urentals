@@ -1,16 +1,20 @@
+import { CategoriesRepositoryInterface } from '../../infra/repositories/interfaces/CategoriesRepository';
 import { CarsRepositoryMemory } from '../../infra/repositories/memory/CarsRepositoryMemory';
+import { CategoriesRepositoryMemory } from '../../infra/repositories/memory/CategoriesRepositoryMemory';
 import { CreateCarUseCase } from '../createCar/CreateCarUseCase';
 import { ListAvailableCarsUseCase } from './ListAvailableCarsUseCase';
 
 let carsRepository: CarsRepositoryMemory;
+let categoriesRepository: CategoriesRepositoryInterface;
 let listAvailableCarsUseCase: ListAvailableCarsUseCase;
 let createCarUseCase: CreateCarUseCase;
 
 describe('List Available Cars', () => {
   beforeEach(() => {
     carsRepository = new CarsRepositoryMemory();
+    categoriesRepository = new CategoriesRepositoryMemory();
     listAvailableCarsUseCase = new ListAvailableCarsUseCase(carsRepository);
-    createCarUseCase = new CreateCarUseCase(carsRepository);
+    createCarUseCase = new CreateCarUseCase(carsRepository, categoriesRepository);
   });
 
   it('should be able to list all available cars', async () => {

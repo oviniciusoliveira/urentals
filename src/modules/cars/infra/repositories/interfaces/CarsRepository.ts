@@ -1,5 +1,5 @@
-import { Car } from '@/modules/cars/entities/Car';
-import { Specification } from '@/modules/cars/entities/Specification';
+import { Car } from 'src/modules/cars/entities/Car';
+import { Specification } from 'src/modules/cars/entities/Specification';
 
 export type CreateCarDTO = {
   name: string;

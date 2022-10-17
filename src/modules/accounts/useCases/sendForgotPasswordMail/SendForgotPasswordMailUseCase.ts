@@ -1,10 +1,9 @@
 import fs from 'fs';
 import handlebars from 'handlebars';
 import { resolve } from 'path';
+import { DateAdapterInterface } from 'src/shared/infra/adapters/interfaces/DateAdapter';
+import { MailAdapterInterface } from 'src/shared/infra/adapters/interfaces/MailAdapter';
 import { v4 as uuidV4 } from 'uuid';
-
-import { DateAdapterInterface } from '@/shared/infra/adapters/interfaces/DateAdapter';
-import { MailAdapterInterface } from '@/shared/infra/adapters/interfaces/MailAdapter';
 
 import { UsersRepositoryInterface } from '../../infra/repositories/interfaces/UsersRepository';
 import { UsersResetPasswordTokensRepositoryInterface } from '../../infra/repositories/interfaces/UsersResetPasswordTokensRepository';

@@ -1,6 +1,5 @@
+import { Rental } from 'src/modules/rentals/entities/Rental';
 import { v4 as uuidV4 } from 'uuid';
-
-import { Rental } from '@/modules/rentals/entities/Rental';
 
 import { CreateRentalDTO, RentalsRepositoryInterface, UpdateRentalDTO } from '../../interfaces/RentalsRepository';
 

@@ -1,5 +1,5 @@
-import { CryptAdapterInterface } from '@/shared/infra/adapters/interfaces/CryptAdapter';
-import { DateAdapterInterface } from '@/shared/infra/adapters/interfaces/DateAdapter';
+import { CryptAdapterInterface } from 'src/shared/infra/adapters/interfaces/CryptAdapter';
+import { DateAdapterInterface } from 'src/shared/infra/adapters/interfaces/DateAdapter';
 
 import { UsersRepositoryInterface } from '../../infra/repositories/interfaces/UsersRepository';
 import { UsersResetPasswordTokensRepositoryInterface } from '../../infra/repositories/interfaces/UsersResetPasswordTokensRepository';

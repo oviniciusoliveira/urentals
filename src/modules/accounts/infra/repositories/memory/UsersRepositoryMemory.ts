@@ -1,11 +1,7 @@
+import { User } from 'src/modules/accounts/entities/User';
 import { v4 as uuidV4 } from 'uuid';
 
-import { User } from '@/modules/accounts/entities/User';
-import {
-  CreateUserDTO,
-  UpdateUserDTO,
-  UsersRepositoryInterface,
-} from '@/modules/accounts/infra/repositories/interfaces/UsersRepository';
+import { CreateUserDTO, UpdateUserDTO, UsersRepositoryInterface } from '../interfaces/UsersRepository';
 
 export class UsersRepositoryMemory implements UsersRepositoryInterface {
   users: User[] = [];

@@ -1,4 +1,4 @@
-import { StorageAdapterInterface } from '@/shared/infra/adapters/interfaces/StorageAdapter';
+import { StorageAdapterInterface } from 'src/shared/infra/adapters/interfaces/StorageAdapter';
 
 import { CarsImagesRepositoryInterface } from '../../infra/repositories/interfaces/CarsImagesRepository';
 import { CarsRepositoryInterface } from '../../infra/repositories/interfaces/CarsRepository';

@@ -1,4 +1,4 @@
-import { UserResetPasswordToken } from '@/modules/accounts/entities/UserResetPasswordToken';
+import { UserResetPasswordToken } from 'src/modules/accounts/entities/UserResetPasswordToken';
 
 export type CreateUserResetPasswordTokenDTO = {
   userId: string;

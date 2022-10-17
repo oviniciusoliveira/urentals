@@ -1,4 +1,4 @@
-import { MailAdapterInterface } from '@/shared/infra/adapters/interfaces/MailAdapter';
+import { MailAdapterInterface } from 'src/shared/infra/adapters/interfaces/MailAdapter';
 
 import { DateAdapterDate } from '../../../../shared/infra/adapters/date/DateAdapterDate';
 import { DateAdapterInterface } from '../../../../shared/infra/adapters/interfaces/DateAdapter';

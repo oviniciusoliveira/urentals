@@ -1,4 +1,4 @@
-import { Car } from '@/modules/cars/entities/Car';
+import { Car } from 'src/modules/cars/entities/Car';
 
 export type Rental = {
   id: string;

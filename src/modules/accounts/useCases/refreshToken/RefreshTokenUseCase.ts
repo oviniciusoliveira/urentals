@@ -1,5 +1,5 @@
-import { DateAdapterInterface } from '@/shared/infra/adapters/interfaces/DateAdapter';
-import { TokenAdapterInterface } from '@/shared/infra/adapters/interfaces/TokenAdapter';
+import { DateAdapterInterface } from 'src/shared/infra/adapters/interfaces/DateAdapter';
+import { TokenAdapterInterface } from 'src/shared/infra/adapters/interfaces/TokenAdapter';
 
 import { UsersTokensRepository } from '../../infra/repositories';
 

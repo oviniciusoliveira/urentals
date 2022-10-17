@@ -1,4 +1,4 @@
-import { DateAdapterInterface } from '@/shared/infra/adapters/interfaces/DateAdapter';
+import { DateAdapterInterface } from 'src/shared/infra/adapters/interfaces/DateAdapter';
 
 import { CryptAdapterInterface } from '../../../../shared/infra/adapters/interfaces/CryptAdapter';
 import { TokenAdapterInterface } from '../../../../shared/infra/adapters/interfaces/TokenAdapter';

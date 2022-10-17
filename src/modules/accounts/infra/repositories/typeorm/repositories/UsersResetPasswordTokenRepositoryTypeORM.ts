@@ -1,7 +1,6 @@
+import { UserResetPasswordToken } from 'src/modules/accounts/entities/UserResetPasswordToken';
 import { getRepository, Repository } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
-
-import { UserResetPasswordToken } from '@/modules/accounts/entities/UserResetPasswordToken';
 
 import {
   CreateUserResetPasswordTokenDTO,

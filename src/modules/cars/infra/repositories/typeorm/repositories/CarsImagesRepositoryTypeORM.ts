@@ -1,7 +1,6 @@
+import { CarImage } from 'src/modules/cars/entities/CarImage';
 import { getRepository, Repository } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
-
-import { CarImage } from '@/modules/cars/entities/CarImage';
 
 import { CarsImagesRepositoryInterface } from '../../interfaces/CarsImagesRepository';
 import { CarImageTypeORM } from '../entities/CarImage';

@@ -1,14 +1,18 @@
 import { CarsRepositoryInterface } from '../../infra/repositories/interfaces/CarsRepository';
+import { CategoriesRepositoryInterface } from '../../infra/repositories/interfaces/CategoriesRepository';
 import { CarsRepositoryMemory } from '../../infra/repositories/memory/CarsRepositoryMemory';
+import { CategoriesRepositoryMemory } from '../../infra/repositories/memory/CategoriesRepositoryMemory';
 import { CreateCarUseCase } from './CreateCarUseCase';
 
 let createCarUseCase: CreateCarUseCase;
 let carsRepository: CarsRepositoryInterface;
+let categoriesRepository: CategoriesRepositoryInterface;
 
 describe('Create Car', () => {
   beforeEach(() => {
+    categoriesRepository = new CategoriesRepositoryMemory();
     carsRepository = new CarsRepositoryMemory();
-    createCarUseCase = new CreateCarUseCase(carsRepository);
+    createCarUseCase = new CreateCarUseCase(carsRepository, categoriesRepository);
   });
 
   it('should be able to create a new car', async () => {
