@@ -4,8 +4,10 @@ node_modules/
 build/
 dist/
 tmp/
-temp/
 .env*
 coverage/
 
 !.env.sample*
+
+temp/**
+!temp/.gitkeep
