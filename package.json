@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "build": "babel src --out-dir dist --copy-files --extensions \".ts,.js\"",
     "dev": "ts-node-dev --transpile-only --ignore node_modules --respawn src/shared/infra/express/server.ts",
