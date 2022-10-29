@@ -16,7 +16,7 @@ export const rateLimiterMiddleware = async (request: Request, response: Response
   const rateLimiter = new RateLimiterRedis({
     storeClient: redisClient,
     keyPrefix: 'rate-limiter',
-    points: 5, // 5 requests
+    points: 3, // 3 requests
     duration: 1, // per 1 second by IP
   });
 
