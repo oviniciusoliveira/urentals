@@ -128,11 +128,11 @@
 
 ### Requisitos Funcionais
 
-- [ ] Deve ser possível o usuáriio recuperar a senha informando o e-mail
-- [ ] O usuário deve receber um e-mail com o passo a passo para a recuperação da senha
-- [ ] O usuário deve conseguir inserir uma nova senha
+- [x] Deve ser possível o usuáriio recuperar a senha informando o e-mail
+- [x] O usuário deve receber um e-mail com o passo a passo para a recuperação da senha
+- [x] O usuário deve conseguir inserir uma nova senha
 
 ### Regras de Negócio
 
-- [ ] O usuário precisa informar uma nova senha
-- [ ] O link enviado para a recuperação de senha deve expirar em 3 horas
+- [x] O usuário precisa informar uma nova senha
+- [] O link enviado para a recuperação de senha deve expirar em 3 horas
