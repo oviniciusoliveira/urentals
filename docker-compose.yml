@@ -16,6 +16,12 @@ services:
     networks:
       - urentcars-network
 
+  redis:
+    image: redis:alpine
+    container_name: redis-rate-limit
+    ports:
+      - 6379:6379
+
   app:
     build: .
     container_name: urentcars-backend

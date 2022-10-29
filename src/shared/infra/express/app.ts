@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 import YAML from 'yamljs';
+import { rateLimiterMiddleware } from './middlewares/rateLimiter';
 
 import { currentConnection } from '../typeorm';
 
@@ -17,6 +18,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(rateLimiterMiddleware);
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
