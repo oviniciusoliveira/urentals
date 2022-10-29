@@ -1,6 +1,7 @@
 /* eslint-disable import-helpers/order-imports */
 import { TEMP_FOLDER } from '../../../config/config';
 import express from 'express';
+import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 import YAML from 'yamljs';
 
@@ -11,7 +12,10 @@ const swaggerDocument = YAML.load('./src/swagger.yaml');
 import { routes } from './routes';
 
 currentConnection();
+
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
